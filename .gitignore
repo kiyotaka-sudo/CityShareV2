@@ -1,0 +1,12 @@
+# JDK embarqué et environnements
+cityshare-backend/jdk17/
+cityshare-backend/.mvn/
+cityshare-backend/target/
+cityshare-backend/logs/
+
+# Node modules Frontend
+cityshare-frontend/node_modules/
+cityshare-frontend/dist/
+
+*.log
+.DS_Store

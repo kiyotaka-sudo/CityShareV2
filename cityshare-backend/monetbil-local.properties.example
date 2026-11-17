@@ -1,0 +1,18 @@
+# Copiez ce fichier vers :
+#   C:\Users\USER\Desktop\CityShare\cityshare-backend\monetbil-local.properties
+# (même dossier que pom.xml — PAS dans src\)
+#
+# === SERVICE KEY (obligatoire pour CityShare) ===
+# Sur Monetbil, page "Intégration du module", ligne du script JavaScript :
+#   <script src="https://fr.monetbil.com/widget/v2.1/XXXXXXXX.js">
+# La partie XXXXXXXX (avant .js) = votre service-key.
+# Ou : menu Services → liste de vos applications → colonne "Service key".
+#
+# === SERVICE SECRET (optionnel pour notre API widget) ===
+# Collez le secret affiché en rouge sur Monetbil (utile plus tard, pas bloquant).
+
+monetbil.service-key=joSoHl7zM2szo6FOOjIaiD1K4S5Upxq2
+monetbil.service-secret=97f4NR08GzBa1ET6XhyrgRlSVpzbclIo6ajkdoQEd22k1nmf62lLvmc6Ng550Dsz
+
+# IP de votre PC sur le réseau du téléphone (ipconfig) :
+monetbil.notify-url-base=http://172.20.10.2:8080

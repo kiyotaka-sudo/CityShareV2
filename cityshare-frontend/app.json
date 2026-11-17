@@ -1,0 +1,60 @@
+{
+  "expo": {
+    "name": "CityShare",
+    "slug": "cityshare",
+    "version": "1.0.0",
+    "newArchEnabled": true,
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1B5E20"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cityshare.mobile",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "CityShare utilise votre position pour le suivi de trajet et les alertes SOS.",
+        "NSCameraUsageDescription": "CityShare utilise la caméra pour scanner les QR Codes de validation."
+      }
+    },
+    "android": {
+      "package": "com.cityshare.mobile",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#1B5E20"
+      },
+      "permissions": [
+        "CAMERA",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "NOTIFICATIONS"
+      ]
+    },
+    "scheme": "cityshare",
+    "extra": {},
+    "plugins": [
+      "expo-localization",
+      "expo-location",
+      "expo-notifications",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "CityShare utilise la caméra pour scanner les QR Codes."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "CityShare accède à votre galerie pour changer votre photo de profil.",
+          "cameraPermission": "CityShare utilise la caméra pour prendre une photo de profil."
+        }
+      ]
+    ]
+  }
+}
