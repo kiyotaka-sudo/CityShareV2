@@ -1,0 +1,19 @@
+# Archive envoyée à EAS Build : seulement l'application mobile (remplace .gitignore pour EAS)
+mboaride-backend/
+cityshare-frontend/
+docs/
+.vscode/
+*.bat
+docker-compose.yml
+render.yaml
+.DS_Store
+*.log
+
+mboaride-mobile/node_modules/
+mboaride-mobile/.expo/
+mboaride-mobile/dist/
+mboaride-mobile/.env
+mboaride-mobile/expo.err
+mboaride-mobile/ios/
+mboaride-mobile/android/
+mboaride-mobile/vendor/
