@@ -1,0 +1,13 @@
+node_modules/
+.expo/
+dist/
+.env
+expo.err
+*.log
+
+# Dossiers natifs générés par « expo prebuild » / « expo run »
+ios/
+android/
+
+# Copie locale de dépendances iOS (connexion instable)
+vendor/

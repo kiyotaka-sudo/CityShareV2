@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Suivi de trajet — MboaRide</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    :root { --vert: #032e5d; --texte: #1f2933; --muted: #6b7280; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--texte); background: #f5f7f6; }
+    body { display: flex; flex-direction: column; }
+    header { background: #fff; color: var(--vert); border-bottom: 4px solid #f78b03; padding: 12px 16px; display: flex; align-items: center; gap: 10px; }
+    header b { font-size: 17px; }
+    .m { width: 28px; height: 28px; border-radius: 7px; background: #ffd23f; color: var(--vert); display: grid; place-items: center; font-weight: 800; }
+    #carte { flex: 1; min-height: 300px; }
+    .fiche { background: #fff; padding: 14px 16px; display: grid; gap: 6px; box-shadow: 0 -2px 8px rgba(0,0,0,.08); }
+    .statut { display: inline-block; padding: 3px 10px; border-radius: 12px; background: #fff1dd; color: #c46e00; font-weight: 600; font-size: 13px; }
+    .muted { color: var(--muted); font-size: 13px; }
+    .erreur { padding: 40px 16px; text-align: center; }
+    .urgence { display: block; text-align: center; background: #d64545; color: #fff; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <header><img src="/assets/logo-pin.png" alt="" style="height:32px"><b>MboaRide</b><span style="color:#6b7280">· Suivi de trajet en direct</span></header>
+  <div id="carte"></div>
+  <section class="fiche" id="fiche"><span class="muted">Chargement…</span></section>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const token = location.pathname.split('/').filter(Boolean).pop();
+    const STATUTS = { RECHERCHE: 'Recherche d’un chauffeur', ACCEPTEE: 'Chauffeur en route', CHAUFFEUR_ARRIVE: 'Chauffeur arrivé',
+      EN_COURS: 'Trajet en cours', TERMINEE: 'Arrivé à destination', ANNULEE: 'Course annulée', EXPIREE: 'Course expirée' };
+    const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const map = L.map('carte').setView([3.8667, 11.5167], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(map);
+    let vehicule, trace, cadre = false;
+    const pastille = (c) => L.divIcon({ className: '', html: `<div style="width:16px;height:16px;border-radius:50%;background:${c};border:3px solid #fff;box-shadow:0 0 4px rgba(0,0,0,.4)"></div>` });
+
+    async function rafraichir() {
+      try {
+        const r = await fetch('/api/public/suivi/' + encodeURIComponent(token));
+        const d = await r.json();
+        if (!r.ok) throw new Error(d.message || 'Lien invalide');
+        document.getElementById('fiche').innerHTML = `
+          <div><span class="statut">${esc(STATUTS[d.statut] || d.statut)}</span> <span class="muted">Course ${esc(d.reference)}</span></div>
+          <div><b>${esc(d.depart.adresse)}</b> → <b>${esc(d.arrivee.adresse)}</b></div>
+          ${d.chauffeurPrenom ? `<div>Chauffeur : <b>${esc(d.chauffeurPrenom)}</b> — ${esc(d.vehicule || '')} ${esc(d.couleur || '')} <b>${esc(d.immatriculation || '')}</b></div>` : ''}
+          ${d.positionAt ? `<div class="muted">Position mise à jour à ${new Date(d.positionAt).toLocaleTimeString('fr-FR')}</div>` : ''}
+          <a class="urgence" href="tel:117">En cas de danger : appeler la police (117)</a>`;
+        if (!cadre) {
+          L.marker([d.depart.lat, d.depart.lng], { icon: pastille('#047030') }).addTo(map).bindPopup('Départ');
+          L.marker([d.arrivee.lat, d.arrivee.lng], { icon: pastille('#d64545') }).addTo(map).bindPopup('Destination');
+          map.fitBounds([[d.depart.lat, d.depart.lng], [d.arrivee.lat, d.arrivee.lng]], { padding: [40, 40] });
+          cadre = true;
+        }
+        if (d.trace && d.trace.length > 1) {
+          trace ? trace.setLatLngs(d.trace) : (trace = L.polyline(d.trace, { color: '#032e5d', weight: 5 }).addTo(map));
+        }
+        if (d.lat) {
+          vehicule ? vehicule.setLatLng([d.lat, d.lng]) : (vehicule = L.marker([d.lat, d.lng], { icon: pastille('#f78b03') }).addTo(map).bindPopup('Véhicule'));
+        }
+        if (['TERMINEE', 'ANNULEE', 'EXPIREE'].includes(d.statut)) return;
+      } catch (e) {
+        document.getElementById('fiche').innerHTML = `<div class="erreur">${esc(e.message)}</div>`;
+        return;
+      }
+      setTimeout(rafraichir, 5000);
+    }
+    rafraichir();
+  </script>
+</body>
+</html>

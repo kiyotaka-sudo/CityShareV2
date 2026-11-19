@@ -1,0 +1,79 @@
+{
+  "expo": {
+    "name": "MboaRide",
+    "slug": "mboaride",
+    "version": "1.0.0",
+    "newArchEnabled": true,
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "scheme": "mboaride",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFFFFF"
+    },
+    "assetBundlePatterns": [
+      "assets/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "cm.mboaride.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "MboaRide utilise votre position pour trouver un chauffeur, suivre la course et envoyer les alertes SOS.",
+        "NSCameraUsageDescription": "MboaRide utilise la caméra pour scanner le QR code de vérification de la course.",
+        "NSPhotoLibraryUsageDescription": "MboaRide accède à vos photos pour votre photo de profil."
+      }
+    },
+    "android": {
+      "package": "cm.mboaride.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#F78B03"
+      },
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "CAMERA",
+        "POST_NOTIFICATIONS",
+        "VIBRATE"
+      ],
+      "usesCleartextTraffic": true
+    },
+    "plugins": [
+      "@maplibre/maplibre-react-native",
+      "expo-localization",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "MboaRide utilise votre position pour trouver un chauffeur et suivre la course."
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "MboaRide utilise la caméra pour scanner le QR code de la course."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "MboaRide accède à vos photos pour votre photo de profil."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#F78B03"
+        }
+      ]
+    ],
+    "extra": {},
+    "primaryColor": "#032E5D",
+    "notification": {
+      "icon": "./assets/notification-icon.png",
+      "color": "#F78B03"
+    }
+  }
+}

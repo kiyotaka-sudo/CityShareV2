@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MboaRide — Back-office</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <!-- Connexion -->
+  <section id="ecran-connexion" class="connexion" hidden>
+    <form id="form-connexion" class="carte-connexion">
+      <img class="logo-complet" src="/assets/logo.png" alt="MboaRide">
+      <div class="bande"><span style="background:#047030"></span><span style="background:#f8d902"></span><span style="background:#f78b03"></span><span style="background:#032e5d"></span></div>
+      <h1>Back-office</h1>
+      <p class="muted">Administration et support</p>
+      <label>E-mail ou téléphone<input name="identifiant" autocomplete="username" required></label>
+      <label>Mot de passe<input name="motDePasse" type="password" autocomplete="current-password" required></label>
+      <p id="erreur-connexion" class="erreur" hidden></p>
+      <button class="btn btn-primaire" type="submit">Se connecter</button>
+    </form>
+  </section>
+
+  <!-- Application -->
+  <div id="app" class="app" hidden>
+    <aside class="menu" id="menu">
+      <div class="logo"><img src="/assets/logo-pin.png" alt=""> MboaRide</div>
+      <nav id="nav"></nav>
+      <div class="menu-pied">
+        <div id="utilisateur-courant" class="muted"></div>
+        <a href="#/compte">Mon compte</a> · <a href="#" id="deconnexion">Déconnexion</a>
+      </div>
+    </aside>
+    <main class="contenu">
+      <header class="barre">
+        <button class="btn-menu" id="btn-menu" aria-label="Menu">☰</button>
+        <h2 id="titre-page"></h2>
+        <div class="barre-droite"><span id="pastille-sos" class="pastille-sos" hidden></span></div>
+      </header>
+      <div id="page" class="page"></div>
+    </main>
+  </div>
+
+  <div id="modale" class="modale" hidden>
+    <div class="modale-boite">
+      <div class="modale-entete"><h3 id="modale-titre"></h3><button class="btn-fermer" data-fermer>×</button></div>
+      <div id="modale-corps" class="modale-corps"></div>
+    </div>
+  </div>
+  <div id="toasts" class="toasts"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pages.js"></script>
+  <script src="js/pages-gestion.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

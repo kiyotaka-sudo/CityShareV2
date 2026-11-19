@@ -1,0 +1,23 @@
+# Copiez ce fichier en "mboaride-local.properties" (même dossier que pom.xml).
+# Ce fichier n'est PAS versionné : il contient vos clés secrètes.
+
+# ---------- SMS Twilio ----------
+# sms.mode=TWILIO
+# sms.twilio.account-sid=ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# sms.twilio.auth-token=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# sms.twilio.from-number=+15005550006
+# (ou un Messaging Service à la place du numéro)
+# sms.twilio.messaging-service-sid=MGxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# ---------- Monetbil ----------
+# monetbil.service-key=VOTRE_SERVICE_KEY
+# monetbil.service-secret=VOTRE_SECRET
+
+# ---------- CamPay ----------
+# campay.base-url=https://demo.campay.net/api
+# campay.username=VOTRE_APP_USERNAME
+# campay.password=VOTRE_APP_PASSWORD
+
+# ---------- URL publique (webhooks, liens de partage) ----------
+# En local, exposez le port 8080 avec ngrok : ngrok http 8080
+# mboaride.public-url=https://xxxx.ngrok-free.app

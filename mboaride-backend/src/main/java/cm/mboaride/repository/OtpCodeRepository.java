@@ -1,0 +1,17 @@
+package cm.mboaride.repository;
+
+import cm.mboaride.entity.*;
+import cm.mboaride.enums.*;
+import java.time.*;
+import java.util.*;
+import org.springframework.data.domain.*;
+import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
+
+public interface OtpCodeRepository extends JpaRepository<OtpCode, Long> {
+  Optional<OtpCode> findTopByTelephoneAndUtiliseFalseOrderByCreatedAtDesc(String telephone);
+  long countByTelephoneAndCreatedAtAfter(String telephone, LocalDateTime depuis);
+  @Modifying
+  @Query("delete from OtpCode o where o.createdAt < :avant")
+  int purgerAvant(@Param("avant") LocalDateTime avant);
+}

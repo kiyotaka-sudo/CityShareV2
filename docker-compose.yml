@@ -1,0 +1,41 @@
+# Déploiement pilote : MySQL + API MboaRide. Usage : docker compose up -d --build
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: mboa_ride
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-change-moi}
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 10
+  api:
+    build: ./mboaride-backend
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/mboa_ride?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+      DB_USER: root
+      DB_PASSWORD: ${DB_PASSWORD:-change-moi}
+      JWT_SECRET: ${JWT_SECRET:-remplacez-par-une-cle-aleatoire-de-plus-de-32-caracteres}
+      PUBLIC_URL: ${PUBLIC_URL:-http://localhost:8080}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-Admin@2026}
+      DEMO_DATA: ${DEMO_DATA:-false}
+      SMS_MODE: ${SMS_MODE:-SIMULATION}
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID:-}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN:-}
+      TWILIO_FROM_NUMBER: ${TWILIO_FROM_NUMBER:-}
+      MONETBIL_SERVICE_KEY: ${MONETBIL_SERVICE_KEY:-}
+      CAMPAY_USERNAME: ${CAMPAY_USERNAME:-}
+      CAMPAY_PASSWORD: ${CAMPAY_PASSWORD:-}
+      CAMPAY_BASE_URL: ${CAMPAY_BASE_URL:-https://demo.campay.net/api}
+    volumes:
+      - uploads:/app/uploads
+volumes:
+  mysql-data:
+  uploads:
