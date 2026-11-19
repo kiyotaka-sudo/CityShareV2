@@ -26,6 +26,7 @@ import { haptique } from '../../components/anime/haptique';
 import { couleurs, ombres, polices } from '../../theme';
 import type { Estimation, EstimationService, ModePaiement, Point, TypeService } from '../../types';
 import type { Routes } from '../../navigation/RootNavigator';
+import { useRetourAccueil } from '../../hooks/useRetourAccueil';
 
 const MODES: { mode: ModePaiement; icone: keyof typeof Ionicons.glyphMap; couleur: string }[] = [
   { mode: 'ESPECES', icone: 'cash-outline', couleur: couleurs.vert },
@@ -39,6 +40,7 @@ const MODES: { mode: ModePaiement; icone: keyof typeof Ionicons.glyphMap; couleu
  * cartes de service avec prix de référence (BF-09), curseur de négociation encadrée (BF-23), options et paiement.
  */
 export default function Reservation({ navigation, route }: StackScreenProps<Routes, 'Reservation'>) {
+  useRetourAccueil();
   const { t } = useTranslation();
   const toast = useToast();
   const insets = useSafeAreaInsets();

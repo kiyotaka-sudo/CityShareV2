@@ -6,6 +6,7 @@ import cm.mboaride.enums.Role;
 import cm.mboaride.enums.StatutCompte;
 import cm.mboaride.exception.ApiException;
 import cm.mboaride.repository.UtilisateurRepository;
+import cm.mboaride.security.CurrentUser;
 import cm.mboaride.security.JwtTokenProvider;
 import cm.mboaride.util.Codes;
 import cm.mboaride.util.Telephones;
@@ -27,6 +28,7 @@ public class AuthService {
   private final JwtTokenProvider tokenProvider;
   private final PasswordEncoder passwordEncoder;
   private final ProfilService profilService;
+  private final CurrentUser currentUser;
 
   public OtpDemandeReponse demanderOtp(OtpDemande demande) {
     String telephone = Telephones.normaliser(demande.telephone());
@@ -107,5 +109,16 @@ public class AuthService {
       code = "MR" + Codes.alphanum(6);
     } while (utilisateurRepository.existsByCodeParrainage(code));
     return code;
+  }
+
+  /**
+   * Session glissante : à chaque ouverture, l'application échange son jeton encore valide contre un jeton neuf.
+   * L'utilisateur reste connecté tant qu'il ouvre l'application au moins une fois par an, ou jusqu'à sa déconnexion.
+   */
+  @Transactional
+  public AuthReponse renouveler() {
+    Utilisateur user = currentUser.get();
+    user.setDerniereConnexion(LocalDateTime.now());
+    return new AuthReponse(tokenProvider.generer(user), profilService.toDto(user));
   }
 }

@@ -61,7 +61,7 @@ const optionsOnglets = { headerShown: false, tabBarActiveTintColor: couleurs.pri
 function OngletsClient() {
   const { t } = useTranslation();
   return (
-    <Onglets.Navigator screenOptions={optionsOnglets}>
+    <Onglets.Navigator screenOptions={optionsOnglets} backBehavior="initialRoute">
       <Onglets.Screen name="Accueil" component={AccueilClient} options={{ title: t('onglets.accueil'), tabBarIcon: icone('car') }} />
       <Onglets.Screen name="Historique" component={Historique} options={{ title: t('onglets.courses'), tabBarIcon: icone('time') }} />
       <Onglets.Screen name="Portefeuille" component={Portefeuille} options={{ title: t('onglets.portefeuille'), tabBarIcon: icone('wallet') }} />
@@ -75,7 +75,7 @@ function OngletsChauffeur() {
   const { utilisateur } = useAuth();
   const conducteur = utilisateur?.role === 'CHAUFFEUR';
   return (
-    <Onglets.Navigator screenOptions={optionsOnglets}>
+    <Onglets.Navigator screenOptions={optionsOnglets} backBehavior="initialRoute">
       {conducteur && <Onglets.Screen name="Accueil" component={AccueilChauffeur} options={{ title: t('onglets.conduire'), tabBarIcon: icone('speedometer') }} />}
       {conducteur && <Onglets.Screen name="Historique" component={Historique} options={{ title: t('onglets.courses'), tabBarIcon: icone('time') }} />}
       <Onglets.Screen name="Gains" component={GainsChauffeur} options={{ title: t('onglets.gains'), tabBarIcon: icone('cash') }} />

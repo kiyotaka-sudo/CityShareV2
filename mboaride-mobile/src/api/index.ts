@@ -14,7 +14,8 @@ export const Api = {
     demanderOtp: (telephone: string) =>
       d<{ envoye: boolean; expireDansSecondes: number; nouveauCompte: boolean; codeDev?: string }>(api.post('/auth/otp/demander', { telephone })),
     verifierOtp: (body: { telephone: string; code: string; nom?: string; prenom?: string; langue?: string; codeParrainage?: string; consentement?: boolean }) =>
-      d<AuthReponse>(api.post('/auth/otp/verifier', body))
+      d<AuthReponse>(api.post('/auth/otp/verifier', body)),
+    renouveler: () => d<AuthReponse>(api.post('/auth/renouveler'))
   },
   moi: {
     get: () => d<Utilisateur>(api.get('/moi')),

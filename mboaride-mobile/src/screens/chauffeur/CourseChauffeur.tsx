@@ -29,6 +29,7 @@ import { fcfa } from '../../utils/format';
 import { couleurs, ombres, polices } from '../../theme';
 import type { Course } from '../../types';
 import type { Routes } from '../../navigation/RootNavigator';
+import { useRetourAccueil } from '../../hooks/useRetourAccueil';
 
 const H = Dimensions.get('window').height;
 const VITESSE_URBAINE_M_MIN = 400;
@@ -40,6 +41,7 @@ const ACTIFS = ['ACCEPTEE', 'CHAUFFEUR_ARRIVE', 'EN_COURS'];
  * encaissement des espèces, commission et note du client.
  */
 export default function CourseChauffeur({ navigation, route }: StackScreenProps<Routes, 'CourseChauffeur'>) {
+  useRetourAccueil();
   const { t, i18n } = useTranslation();
   const { rafraichir } = useAuth();
   const { courseId } = route.params;

@@ -32,6 +32,7 @@ import { fcfa, dateHeure } from '../../utils/format';
 import { couleurs, ombres, polices } from '../../theme';
 import type { Course, Offre, Paiement, TypeService } from '../../types';
 import type { Routes } from '../../navigation/RootNavigator';
+import { useRetourAccueil } from '../../hooks/useRetourAccueil';
 
 const FILE = '/user/queue/courses';
 const H = Dimensions.get('window').height;
@@ -48,6 +49,7 @@ const typeCarte = (t: TypeService): VehiculeCarte['type'] => (t === 'MOTO' ? 'MO
  * progression du trajet (9), puis fin de course avec confettis, notation et reçu (10).
  */
 export default function CourseClient({ navigation, route }: StackScreenProps<Routes, 'CourseClient'>) {
+  useRetourAccueil();
   const { t, i18n } = useTranslation();
   const { rafraichir } = useAuth();
   const { courseId } = route.params;

@@ -1,20 +1,37 @@
 {
-  "cli": { "version": ">= 16.0.0", "appVersionSource": "remote" },
+  "cli": {
+    "version": ">= 16.0.0",
+    "appVersionSource": "remote"
+  },
   "build": {
     "development": {
       "developmentClient": true,
       "distribution": "internal",
-      "android": { "buildType": "apk" },
-      "ios": { "simulator": true }
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "simulator": true
+      }
     },
     "preview": {
       "distribution": "internal",
-      "android": { "buildType": "apk" },
-      "env": { "EXPO_PUBLIC_API_URL": "https://VOTRE-SERVEUR/api", "EXPO_PUBLIC_WS_URL": "https://VOTRE-SERVEUR/ws" }
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://mboaride-api.onrender.com/api",
+        "EXPO_PUBLIC_WS_URL": "https://mboaride-api.onrender.com/ws"
+      }
     },
     "production": {
-      "android": { "buildType": "apk" },
-      "env": { "EXPO_PUBLIC_API_URL": "https://VOTRE-SERVEUR/api", "EXPO_PUBLIC_WS_URL": "https://VOTRE-SERVEUR/ws" }
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://mboaride-api.onrender.com/api",
+        "EXPO_PUBLIC_WS_URL": "https://mboaride-api.onrender.com/ws"
+      }
     }
   }
 }

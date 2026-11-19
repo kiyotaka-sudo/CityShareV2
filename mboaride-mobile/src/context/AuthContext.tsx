@@ -47,15 +47,21 @@ export function AuthProvider({ children }: PropsWithChildren) {
     session.surExpiration(() => setUtilisateur(null));
     (async () => {
       const token = await session.charger();
-      if (token) {
-        // Affichage immédiat du profil en cache (réseau lent), puis rafraîchissement
-        const cache = await AsyncStorage.getItem(CLE_UTILISATEUR);
-        if (cache) setUtilisateur(JSON.parse(cache));
+      if (!token) { setChargement(false); return; }
+      // Le profil en cache s'affiche tout de suite : pas d'attente si le réseau est lent ou le serveur endormi
+      const cache = await AsyncStorage.getItem(CLE_UTILISATEUR);
+      if (cache) { setUtilisateur(JSON.parse(cache)); setChargement(false); }
+      // Session glissante : jeton neuf à chaque ouverture. En cas d'échec réseau, la session en cache est conservée.
+      try {
+        const r = await Api.auth.renouveler();
+        await session.definir(r.token);
+        mettreAJour(r.utilisateur);
+      } catch {
         await rafraichir();
       }
       setChargement(false);
     })();
-  }, [rafraichir]);
+  }, [rafraichir, mettreAJour]);
 
   const connecter = useCallback(async (token: string, u: Utilisateur) => {
     await session.definir(token);

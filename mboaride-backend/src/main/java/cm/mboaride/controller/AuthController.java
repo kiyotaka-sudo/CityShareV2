@@ -23,6 +23,12 @@ public class AuthController {
     return authService.verifierOtp(req);
   }
 
+  /** Renouvelle le jeton de l'utilisateur connecté (session qui dure jusqu'à la déconnexion). */
+  @PostMapping("/renouveler")
+  public AuthReponse renouveler() {
+    return authService.renouveler();
+  }
+
   @PostMapping("/admin/login")
   public AuthReponse connexionAdmin(@Valid @RequestBody AdminLogin req) {
     return authService.connexionAdmin(req);

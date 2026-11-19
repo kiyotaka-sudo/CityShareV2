@@ -69,11 +69,16 @@
         }
       ]
     ],
-    "extra": {},
+    "extra": {
+      "eas": {
+        "projectId": "5fd676e8-23b9-4a8c-b77f-26049e9cb070"
+      }
+    },
     "primaryColor": "#032E5D",
     "notification": {
       "icon": "./assets/notification-icon.png",
       "color": "#F78B03"
-    }
+    },
+    "owner": "yan40"
   }
 }
