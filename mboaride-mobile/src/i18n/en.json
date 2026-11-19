@@ -238,7 +238,10 @@
  },
  "historique": {
   "titre": "My rides",
-  "vide": "No rides yet."
+  "vide": "Your trips will appear here, with their price and receipt.",
+  "videTitre": "No rides yet",
+  "videChauffeur": "Your completed rides will appear here with your earnings.",
+  "commander": "Book a ride"
  },
  "detail": {
   "statut": "Status",
@@ -264,7 +267,9 @@
   "numero": "Mobile Money number",
   "payer": "Top up",
   "historique": "History",
-  "aucune": "No transactions."
+  "aucune": "No transactions.",
+  "aide": "Pay for rides in one tap, no change needed.",
+  "payerMontant": "Top up {{montant}}"
  },
  "transactions": {
   "GAIN_COURSE": "Ride earnings",
@@ -321,7 +326,9 @@
   "vide": "No favourite places."
  },
  "notifications": {
-  "vide": "No notifications."
+  "vide": "No notifications.",
+  "videTitre": "All quiet",
+  "nonLue": "Unread"
  },
  "reclamations": {
   "nouvelle": "Report an incident",
@@ -483,5 +490,18 @@
   "texte2": "The reference price is shown before you book. Offer your own price within the allowed range.",
   "titre3": "Ride with confidence",
   "texte3": "Verified drivers, verification code, live trip sharing and an SOS button."
+ },
+ "hors": {
+  "titre": "Offline maps",
+  "sousTitre": "Read the map without a connection",
+  "explication": "Download your city’s map over Wi-Fi: it stays readable when the network is weak. Prices and routes still need a connection.",
+  "pret": "Available offline · {{taille}}",
+  "enCours": "Downloading… {{pct}}% · {{taille}}",
+  "absent": "Not downloaded",
+  "telechargerCourt": "Download",
+  "telecharger": "Download the {{ville}} map",
+  "supprimerTitre": "Delete the {{ville}} map?",
+  "supprimerTexte": "You can download it again later.",
+  "indisponible": "Offline maps are available in the installed app (APK), not in Expo Go."
  }
 }

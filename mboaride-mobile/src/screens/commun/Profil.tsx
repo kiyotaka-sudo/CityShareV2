@@ -90,6 +90,7 @@ export default function Profil() {
         <Ligne icone="people" texte={t('profil.contacts')} sousTexte={t('profil.contactsAide')} onPress={() => nav.navigate('Contacts')} />
         {!chauffeur && <Ligne icone="star" texte={t('profil.lieux')} onPress={() => nav.navigate('Lieux')} />}
         <Ligne icone="notifications" texte={t('profil.notifications')} onPress={() => nav.navigate('Notifications')} />
+        <Ligne icone="cloud-download" texte={t('hors.titre')} sousTexte={t('hors.sousTitre')} onPress={() => nav.navigate('CartesHorsLigne')} />
         <Ligne icone="chatbox-ellipses" texte={t('profil.reclamations')} onPress={() => nav.navigate('Reclamations')} />
         {chauffeur && <Ligne icone="document-attach" texte={t('profil.documents')} onPress={() => nav.navigate('Documents')} />}
         {chauffeur && (

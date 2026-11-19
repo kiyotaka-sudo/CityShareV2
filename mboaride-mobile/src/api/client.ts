@@ -56,7 +56,10 @@ type ConfigRelance = InternalAxiosRequestConfig & { _essai?: number };
  */
 api.interceptors.response.use(undefined, async (error: AxiosError) => {
   const config = error.config as ConfigRelance | undefined;
-  if (error.response?.status === 401 && token) {
+  // Seul un refus du jeton en cours ferme la session. Une requête partie sans jeton (écran encore monté pendant
+  // la connexion ou la déconnexion) ou avec un ancien jeton ne doit pas déconnecter un compte valide.
+  const jetonEnvoye = config?.headers?.Authorization;
+  if (error.response?.status === 401 && token && jetonEnvoye === `Bearer ${token}`) {
     await session.definir(null);
     surDeconnexion?.();
     return Promise.reject(error);

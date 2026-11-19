@@ -23,9 +23,9 @@ import type { Routes } from '../../navigation/RootNavigator';
 
 const ICONES_LIEU: Record<Lieu['type'], keyof typeof Ionicons.glyphMap> = { MAISON: 'home', TRAVAIL: 'briefcase', CAMPUS: 'school', AUTRE: 'star' };
 const SERVICES: { type: TypeService; image: number; couleur: string }[] = [
-  { type: 'DEPOT', image: require('../../../assets/images/service-taxi.png'), couleur: couleurs.primaire },
-  { type: 'RAMASSAGE', image: require('../../../assets/images/service-ramassage.png'), couleur: couleurs.vert },
-  { type: 'MOTO', image: require('../../../assets/images/service-moto.png'), couleur: couleurs.accent }
+  { type: 'DEPOT', image: require('../../../assets/images/service-taxi.webp'), couleur: couleurs.primaire },
+  { type: 'RAMASSAGE', image: require('../../../assets/images/service-ramassage.webp'), couleur: couleurs.vert },
+  { type: 'MOTO', image: require('../../../assets/images/service-moto.webp'), couleur: couleurs.accent }
 ];
 
 /**

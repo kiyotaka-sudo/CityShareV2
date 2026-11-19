@@ -130,8 +130,8 @@ export default function DemandePleinEcran({ demande, occupe, onAccepter, onContr
                 <Text style={{ fontFamily: polices.titreDemi, fontSize: 15, color: couleurs.texte }}>{t('chauffeur.votreContre')}</Text>
                 <CurseurPrix vue="chauffeur" min={d.prixMin} max={d.prixMax} reference={d.prixPropose} valeur={prix} onChange={setPrix} />
                 <View style={{ flexDirection: 'row', gap: 10 }}>
-                  <Bouton style={{ flex: 1 }} variante="contour" titre={t('commun.annuler')} onPress={() => setContre(false)} />
-                  <Bouton style={{ flex: 1.4 }} variante="accent" titre={t('chauffeur.envoyerPrix', { prix: fcfa(prix) })} chargement={occupe}
+                  <Bouton style={{ flex: 0.8 }} variante="contour" titre={t('commun.annuler')} onPress={() => setContre(false)} />
+                  <Bouton style={{ flex: 1.7 }} variante="accent" titre={t('chauffeur.envoyerPrix', { prix: fcfa(prix) })} chargement={occupe}
                     desactive={prix === d.prixPropose} onPress={() => onContreProposer(prix)} />
                 </View>
               </Animated.View>

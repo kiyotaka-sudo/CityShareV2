@@ -1,0 +1,29 @@
+# Déploiement du backend MboaRide sur Render (Blueprint) — base PostgreSQL sur Supabase (Francfort).
+# Render → New → Blueprint → ce dépôt. Seule la valeur DB_PASSWORD est à saisir à la main (fichier mboaride-backend/.env.supabase).
+services:
+  - type: web
+    name: mboaride-api
+    runtime: docker
+    rootDir: mboaride-backend
+    dockerfilePath: ./Dockerfile
+    region: frankfurt
+    plan: free
+    healthCheckPath: /api/public/config
+    envVars:
+      - key: DB_URL
+        value: jdbc:postgresql://aws-0-eu-central-1.pooler.supabase.com:5432/postgres?sslmode=require&tcpKeepAlive=true
+      - key: DB_USER
+        value: mboaride_app.oeftcpppieknrfxjklpr
+      - key: DB_PASSWORD
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PUBLIC_URL
+        value: https://mboaride-api.onrender.com
+      - key: DEMO_DATA
+        value: "false"
+      - key: SMS_MODE
+        value: SIMULATION
+      # 512 Mo de mémoire en offre gratuite
+      - key: JAVA_TOOL_OPTIONS
+        value: -Xmx320m -Xss512k -XX:+UseSerialGC -XX:MaxMetaspaceSize=160m

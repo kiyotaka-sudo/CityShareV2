@@ -28,6 +28,7 @@ import AccueilChauffeur from '../screens/chauffeur/AccueilChauffeur';
 import CourseChauffeur from '../screens/chauffeur/CourseChauffeur';
 import GainsChauffeur from '../screens/chauffeur/GainsChauffeur';
 import Documents from '../screens/chauffeur/Documents';
+import CartesHorsLigne from '../screens/commun/CartesHorsLigne';
 import FlotteProprietaire from '../screens/chauffeur/FlotteProprietaire';
 
 export type Routes = {
@@ -46,6 +47,7 @@ export type Routes = {
   Messagerie: { courseId: number; interlocuteur: string };
   CourseChauffeur: { courseId: number };
   Documents: undefined;
+  CartesHorsLigne: undefined;
 };
 
 export const navigationRef = createNavigationContainerRef<Routes>();
@@ -110,6 +112,7 @@ export default function RootNavigator() {
           <Stack.Screen name="Reclamations" component={Reclamations} />
           <Stack.Screen name="Messagerie" component={Messagerie} />
           <Stack.Screen name="Documents" component={Documents} />
+          <Stack.Screen name="CartesHorsLigne" component={CartesHorsLigne} />
         </>
       )}
     </Stack.Navigator>

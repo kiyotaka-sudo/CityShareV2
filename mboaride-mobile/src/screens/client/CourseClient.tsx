@@ -219,7 +219,7 @@ export default function CourseClient({ navigation, route }: StackScreenProps<Rou
 
       <SafeAreaView edges={['top']} pointerEvents="box-none" style={{ position: 'absolute', top: 0, left: 0, right: 0, paddingHorizontal: 16, paddingTop: 8, gap: 10 }}>
         <View pointerEvents="box-none" style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <PressableAnime onPress={() => navigation.navigate('Onglets')}
+          <PressableAnime onPress={() => navigation.navigate('Onglets')} accessibilityLabel={t('onglets.accueil')}
             style={[{ backgroundColor: '#fff', borderRadius: 24, width: 46, height: 46, alignItems: 'center', justifyContent: 'center' }, ombres.moyenne]}>
             <Ionicons name="home" size={22} color={couleurs.primaire} />
           </PressableAnime>

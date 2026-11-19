@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import { couleurs, espace, police, polices, rayon } from '../theme';
 import PressableAnime from './anime/Pressable';
 import { urlPhoto } from '../api/client';
+import EtatVide from './anime/EtatVide';
 
 type Variante = 'primaire' | 'secondaire' | 'danger' | 'contour' | 'accent';
 
@@ -113,13 +114,11 @@ export function Ligne({ icone, texte, sousTexte, onPress, droite }: {
   );
 }
 
-export function Vide({ texte, icone = 'file-tray-outline' }: { texte: string; icone?: keyof typeof Ionicons.glyphMap }) {
-  return (
-    <View style={{ alignItems: 'center', padding: espace.xl, gap: espace.s }}>
-      <Ionicons name={icone} size={44} color={couleurs.bord} />
-      <Text style={{ color: couleurs.texteSecondaire, textAlign: 'center' }}>{texte}</Text>
-    </View>
-  );
+/** État vide illustré et animé (voir EtatVide). */
+export function Vide({ texte, icone = 'file-tray-outline', titre, illustration, action }: {
+  texte: string; icone?: keyof typeof Ionicons.glyphMap; titre?: string; illustration?: string; action?: ReactNode;
+}) {
+  return <EtatVide texte={texte} icone={icone} titre={titre} illustration={illustration} action={action} />;
 }
 
 export function Chargement() {

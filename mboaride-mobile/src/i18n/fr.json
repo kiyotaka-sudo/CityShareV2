@@ -238,7 +238,10 @@
  },
  "historique": {
   "titre": "Mes courses",
-  "vide": "Aucune course pour le moment."
+  "vide": "Vos trajets apparaîtront ici, avec leur prix et leur reçu.",
+  "videTitre": "Aucune course pour l’instant",
+  "videChauffeur": "Vos courses terminées apparaîtront ici avec vos gains.",
+  "commander": "Commander une course"
  },
  "detail": {
   "statut": "Statut",
@@ -264,7 +267,9 @@
   "numero": "Numéro Mobile Money",
   "payer": "Recharger",
   "historique": "Historique",
-  "aucune": "Aucune opération."
+  "aucune": "Aucune opération.",
+  "aide": "Payez vos courses en un geste, sans monnaie.",
+  "payerMontant": "Recharger {{montant}}"
  },
  "transactions": {
   "GAIN_COURSE": "Gain de course",
@@ -321,7 +326,9 @@
   "vide": "Aucun lieu favori."
  },
  "notifications": {
-  "vide": "Aucune notification."
+  "vide": "Aucune notification.",
+  "videTitre": "Tout est calme",
+  "nonLue": "Non lue"
  },
  "reclamations": {
   "nouvelle": "Signaler un incident",
@@ -483,5 +490,18 @@
   "texte2": "Le prix de référence s’affiche avant de commander. Proposez votre prix dans la fourchette autorisée.",
   "titre3": "Voyagez en confiance",
   "texte3": "Chauffeurs vérifiés, code de vérification, partage du trajet en direct et bouton SOS."
+ },
+ "hors": {
+  "titre": "Cartes hors ligne",
+  "sousTitre": "Lire la carte sans connexion",
+  "explication": "Téléchargez la carte de votre ville en Wi-Fi : elle restera lisible quand le réseau est faible. Les prix et les itinéraires demandent toujours une connexion.",
+  "pret": "Disponible hors ligne · {{taille}}",
+  "enCours": "Téléchargement… {{pct}} % · {{taille}}",
+  "absent": "Non téléchargée",
+  "telechargerCourt": "Télécharger",
+  "telecharger": "Télécharger la carte de {{ville}}",
+  "supprimerTitre": "Supprimer la carte de {{ville}} ?",
+  "supprimerTexte": "Elle pourra être téléchargée de nouveau.",
+  "indisponible": "Les cartes hors ligne sont disponibles dans l’application installée (APK), pas dans Expo Go."
  }
 }

@@ -9,9 +9,9 @@ import PrixAnime from './PrixAnime';
 import { fcfa } from '../../utils/format';
 
 const IMAGES = {
-  DEPOT: require('../../../assets/images/service-taxi.png'),
-  RAMASSAGE: require('../../../assets/images/service-ramassage.png'),
-  MOTO: require('../../../assets/images/service-moto.png')
+  DEPOT: require('../../../assets/images/service-taxi.webp'),
+  RAMASSAGE: require('../../../assets/images/service-ramassage.webp'),
+  MOTO: require('../../../assets/images/service-moto.webp')
 };
 
 /** Carte d'un service (dépôt, ramassage, moto) : sélection animée, prix qui défile, badges. */

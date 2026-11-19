@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
 import { couleurs } from '../../theme';
+import { useReduireAnimations } from '../anime/useReduireAnimations';
 
 const COULEURS = [couleurs.primaire, couleurs.accent, couleurs.vert, couleurs.jaune];
 const { width: L, height: H } = Dimensions.get('window');
@@ -22,12 +23,15 @@ function Piece({ x, delai, couleur, rotation, largeur, derive }: { x: number; de
 
 /** Pluie de confettis aux couleurs du logo (moment 10), sans fichier Lottie : 60 pièces animées par Reanimated. */
 export default function Confettis() {
+  const reduire = useReduireAnimations();
   const pieces = useMemo(() => Array.from({ length: 60 }, (_, i) => ({
     x: Math.random() * L, delai: Math.random() * 500, couleur: COULEURS[i % COULEURS.length],
     rotation: Math.random() * 360, largeur: 8 + Math.random() * 8, derive: 10 + Math.random() * 30
   })), []);
+  if (reduire) return null; // « Réduire les animations » : pas de confettis
   return (
-    <View pointerEvents="none" style={StyleSheet.absoluteFill}>
+    // zIndex/elevation : le panneau glissant se place au-dessus des autres vues, les confettis doivent le couvrir
+    <View pointerEvents="none" style={[StyleSheet.absoluteFill, { zIndex: 1000, elevation: 1000 }]}>
       {pieces.map((p, i) => <Piece key={i} {...p} />)}
     </View>
   );
