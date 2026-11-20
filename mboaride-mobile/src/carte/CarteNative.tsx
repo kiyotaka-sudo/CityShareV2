@@ -25,7 +25,7 @@ const ligne = (coords: { lat: number; lng: number }[]): GeoJSON.Feature<GeoJSON.
  */
 export default function CarteNative({
   vehicules = AUCUN_VEHICULE, points = AUCUN_POINT, trace: traceComplete, zonesChaudes, centre, zoom = 14, ajuster = true, suivre,
-  aimanterSurTrace, animerTrace, nuit = 'auto', marges, radar, onPress
+  aimanterSurTrace, animerTrace, nuit = 'auto', marges, radar, recentrage, maPosition, onPress
 }: CarteProps) {
   const traceVisible = useTraceProgressive(traceComplete, !!animerTrace);
   const trace = traceComplete;
@@ -94,6 +94,13 @@ export default function CarteNative({
   useEffect(() => {
     if (centre && !ajuster) camera.current?.easeTo({ center: [centre.lng, centre.lat], duration: 800 });
   }, [centre?.lat, centre?.lng, ajuster]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Bouton « Ma position » : la caméra glisse vers l'utilisateur ; le suivi d'un véhicule se met en pause 8 s
+  useEffect(() => {
+    if (!recentrage) return;
+    interaction.current = Date.now();
+    camera.current?.easeTo({ center: [recentrage.lng, recentrage.lat], zoom: 16, duration: 800 });
+  }, [recentrage?.cle]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Caméra qui suit le véhicule, en pause 8 s après un geste de l'utilisateur
   useEffect(() => {
@@ -168,6 +175,12 @@ export default function CarteNative({
           'circle-stroke-width': 3,
           'circle-stroke-color': '#FFFFFF'
         }} />
+      </GeoJSONSource>
+
+      <GeoJSONSource id="ma-position" data={{ type: 'FeatureCollection', features: maPosition
+        ? [{ type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [maPosition.lng, maPosition.lat] } }] : [] }}>
+        <Layer id="ma-position-halo" type="circle" paint={{ 'circle-radius': 20, 'circle-color': couleurs.bleu, 'circle-opacity': 0.16 }} />
+        <Layer id="ma-position-point" type="circle" paint={{ 'circle-radius': 7, 'circle-color': couleurs.bleu, 'circle-stroke-width': 3, 'circle-stroke-color': '#FFFFFF' }} />
       </GeoJSONSource>
 
       <GeoJSONSource id="vehicules" data={vehiculesGeo}>

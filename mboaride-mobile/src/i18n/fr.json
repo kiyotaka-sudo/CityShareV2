@@ -503,5 +503,12 @@
   "supprimerTitre": "Supprimer la carte de {{ville}} ?",
   "supprimerTexte": "Elle pourra être téléchargée de nouveau.",
   "indisponible": "Les cartes hors ligne sont disponibles dans l’application installée (APK), pas dans Expo Go."
+ },
+ "carte": {
+  "maPosition": "Ma position",
+  "positionRefuseeTitre": "Localisation désactivée",
+  "positionRefusee": "Autorisez MboaRide à utiliser votre position dans les réglages du téléphone.",
+  "positionIndisponibleTitre": "Position introuvable",
+  "positionIndisponible": "Activez le GPS du téléphone, puis réessayez."
  }
 }

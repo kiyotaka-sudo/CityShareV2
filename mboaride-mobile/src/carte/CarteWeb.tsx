@@ -18,7 +18,7 @@ const ICONES = {
  */
 export default function CarteWeb({
   vehicules = AUCUN_VEHICULE, points = AUCUN_POINT, trace, zonesChaudes, centre, zoom = 14, ajuster = true, suivre,
-  aimanterSurTrace, nuit = 'auto', marges, radar, onPress
+  aimanterSurTrace, nuit = 'auto', marges, radar, recentrage, onPress
 }: CarteProps) {
   const ref = useRef<WebView>(null);
   const pret = useRef(false);
@@ -41,6 +41,10 @@ export default function CarteWeb({
     derniereEmission.current = t;
     envoyer(`window.vehicules(${JSON.stringify(affiches.map((v) => ({ ...v, icone: ICONES[v.type] })))}, ${JSON.stringify(suivre ?? null)})`);
   }, [affiches]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (recentrage) envoyer(`window.centrer(${recentrage.lat},${recentrage.lng},16)`);
+  }, [recentrage?.cle]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (centre && !ajuster) envoyer(`window.centrer(${centre.lat},${centre.lng})`);
@@ -89,7 +93,7 @@ window.vehicules=function(liste,suivre){var vus={};liste.forEach(function(v){vus
  else m.setLatLng([v.lat,v.lng]);var img=m.getElement()&&m.getElement().querySelector('img');if(img)img.style.transform='rotate('+v.cap+'deg)';
  if(v.id===suivre&&Date.now()-geste>8000){map.panTo([v.lat,v.lng],{animate:true,duration:.5});}});
  Object.keys(vehs).forEach(function(id){if(!vus[id]){map.removeLayer(vehs[id]);delete vehs[id];}});};
-window.centrer=function(a,b){map.flyTo([a,b],map.getZoom(),{duration:.8});};
+window.centrer=function(a,b,z){map.flyTo([a,b],z||map.getZoom(),{duration:.8});};
 map.on('click',function(ev){window.ReactNativeWebView.postMessage(JSON.stringify({type:'clic',lat:ev.latlng.lat,lng:ev.latlng.lng}));});
 window.ReactNativeWebView.postMessage(JSON.stringify({type:'pret'}));
 </script></body></html>`;

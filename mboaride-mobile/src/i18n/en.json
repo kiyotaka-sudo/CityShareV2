@@ -503,5 +503,12 @@
   "supprimerTitre": "Delete the {{ville}} map?",
   "supprimerTexte": "You can download it again later.",
   "indisponible": "Offline maps are available in the installed app (APK), not in Expo Go."
+ },
+ "carte": {
+  "maPosition": "My location",
+  "positionRefuseeTitre": "Location turned off",
+  "positionRefusee": "Allow MboaRide to use your location in the phone settings.",
+  "positionIndisponibleTitre": "Location unavailable",
+  "positionIndisponible": "Turn on the phone's GPS, then try again."
  }
 }

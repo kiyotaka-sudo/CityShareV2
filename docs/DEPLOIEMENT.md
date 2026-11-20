@@ -25,6 +25,17 @@ DB_URL="jdbc:postgresql://aws-0-eu-central-1.pooler.supabase.com:5432/postgres?s
   java -cp ~/.m2/repository/org/postgresql/postgresql/42.7.11/postgresql-42.7.11.jar scripts/migration-supabase/ExecuterSql.java /tmp/donnees.sql
 ```
 
+## Adresse publique : relais Vercel
+
+Certains réseaux (dont celui utilisé pendant le développement) bloquent toutes les adresses `*.onrender.com`.
+L'application et le back-office passent donc par **https://mboaride-api.vercel.app** : un projet Vercel
+(`relais-vercel/vercel.json`) qui transmet chaque requête au serveur Render, côté serveur.
+
+- API : `https://mboaride-api.vercel.app/api/…`, back-office : `https://mboaride-api.vercel.app/admin/`.
+- Temps réel : SockJS passe en interrogation HTTP régulière (les WebSocket ne traversent pas le relais).
+- Si Render dort, le premier appel peut échouer (délai du relais : 120 s, réveil de Render : ~165 s) ;
+  l'application réessaie, puis tout répond normalement.
+
 ## Backend sur Render
 
 1. Créer un compte sur render.com (connexion avec GitHub).

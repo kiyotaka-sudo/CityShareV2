@@ -4,7 +4,7 @@ import { ActivityIndicator, Image, LogBox, View } from 'react-native';
 
 // Réseau faible (BNF-02) : MapLibre relance seul les tuiles et polices en échec ; ces délais dépassés
 // ne sont pas des bogues et ne doivent pas masquer l'écran en développement.
-LogBox.ignoreLogs([/MapLibre Native \[ERROR\].*(timed out|connection was lost|Failed to load|not connected to the internet)/]);
+LogBox.ignoreLogs([/MapLibre Native \[ERROR\].*(timed out|connection was lost|Failed to load|not connected to the internet|appears to be offline|network connection was lost)/]);
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';

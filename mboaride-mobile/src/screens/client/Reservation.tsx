@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Pressable, Switch, Text, View } from 'react-native';
+import { Dimensions, Pressable, Switch, Text, View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
@@ -151,7 +151,8 @@ export default function Reservation({ navigation, route }: StackScreenProps<Rout
 
   return (
     <View style={{ flex: 1, backgroundColor: couleurs.fond }}>
-      <CarteMboa points={points} trace={trace} animerTrace ajuster centre={position ?? undefined} marges={{ haut: 120, bas: 420 }} />
+      <CarteMboa points={points} trace={trace} animerTrace ajuster centre={position ?? undefined} marges={{ haut: 120, bas: 420 }}
+        boutonPositionBas={Dimensions.get('window').height * (arrivee ? 0.58 : 0.3) + 12} />
 
       <SafeAreaView edges={['top']} pointerEvents="box-none" style={{ position: 'absolute', top: 0, left: 0, right: 0, paddingHorizontal: 16, paddingTop: 8 }}>
         <View style={{ flexDirection: 'row', gap: 10, alignItems: 'flex-start' }}>

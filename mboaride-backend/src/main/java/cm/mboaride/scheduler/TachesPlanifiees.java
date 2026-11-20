@@ -37,7 +37,7 @@ public class TachesPlanifiees {
   public void delaisNegociation() {
     for (Course c : courseRepository.findRecherchesExpirees(LocalDateTime.now())) {
       try {
-        courseService.traiterDelaiOffres(courseRepository.findById(c.getId()).orElseThrow());
+        courseService.traiterDelaiOffres(c.getId());
       } catch (Exception ex) {
         log.warn("Relance de la course {} impossible : {}", c.getReference(), ex.getMessage());
       }
@@ -50,7 +50,7 @@ public class TachesPlanifiees {
     LocalDateTime limite = LocalDateTime.now().plusMinutes(parametres.entier(ParametreService.PLANIF_AVANCE));
     for (Course c : courseRepository.findPlanifieesALancer(limite)) {
       try {
-        courseService.lancerPlanifiee(courseRepository.findById(c.getId()).orElseThrow());
+        courseService.lancerPlanifiee(c.getId());
       } catch (Exception ex) {
         log.warn("Lancement de la course planifiée {} impossible : {}", c.getReference(), ex.getMessage());
       }

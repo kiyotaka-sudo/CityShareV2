@@ -183,8 +183,10 @@ public class CourseService {
 
   /** Lance une course planifiée à l'approche de l'heure prévue (BF-14). */
   @Transactional
-  public void lancerPlanifiee(Course course) {
-    if (course.getStatut() != StatutCourse.PLANIFIEE) {
+  public void lancerPlanifiee(Long courseId) {
+    // Rechargée dans la transaction : appelée par une tâche planifiée, hors de toute session Hibernate
+    Course course = courseRepository.findById(courseId).orElse(null);
+    if (course == null || course.getStatut() != StatutCourse.PLANIFIEE) {
       return;
     }
     course.setStatut(StatutCourse.RECHERCHE);
@@ -301,8 +303,10 @@ public class CourseService {
 
   /** Délai écoulé sans choix : la demande est relancée au prix de référence, puis expire (section 5.5). */
   @Transactional
-  public void traiterDelaiOffres(Course c) {
-    if (c.getStatut() != StatutCourse.RECHERCHE) {
+  public void traiterDelaiOffres(Long courseId) {
+    // Rechargée dans la transaction : sinon le client et les offres (chargement paresseux) sont inaccessibles
+    Course c = courseRepository.findById(courseId).orElse(null);
+    if (c == null || c.getStatut() != StatutCourse.RECHERCHE) {
       return;
     }
     List<Offre> enAttente = offreRepository.findEnAttente(c.getId(), c.getTourNegociation());

@@ -38,6 +38,10 @@ export interface CarteProps {
   aimanterSurTrace?: boolean;
   /** L'itinéraire se dessine progressivement quand il change (réservation). */
   animerTrace?: boolean;
+  /** Recentrage demandé par le bouton « Ma position » (la clé change à chaque appui). */
+  recentrage?: Coord & { cle: number };
+  /** Point bleu « vous êtes ici », indépendant du cadrage automatique sur le trajet. */
+  maPosition?: Coord;
   /** Point autour duquel pulse le radar de recherche d'un chauffeur. */
   radar?: Coord;
   /** Style sombre : true, false ou 'auto' (19 h - 6 h). */

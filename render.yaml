@@ -19,7 +19,7 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: PUBLIC_URL
-        value: https://mboaride-api.onrender.com
+        value: https://mboaride-api.vercel.app
       - key: DEMO_DATA
         value: "false"
       - key: SMS_MODE
